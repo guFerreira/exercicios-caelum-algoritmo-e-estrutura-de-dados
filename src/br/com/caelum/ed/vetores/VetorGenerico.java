@@ -42,9 +42,17 @@ public class VetorGenerico implements IVetor{
         throw new IllegalArgumentException("Posicao informada não é válida");
 
     }
+
+    private boolean posicaoOcupada(int posicao){
+        if(posicao >= 0 && posicao < this.totalDeAlunos){
+            return true;
+        }
+        throw new IllegalArgumentException("Posicao informada não é válida");
+
+    }
     @Override
     public Object pega(int posicao) {
-        if(this.posicaoValida(posicao)){
+        if(this.posicaoOcupada(posicao)){
             return this.objects[posicao];
         }
         return null;

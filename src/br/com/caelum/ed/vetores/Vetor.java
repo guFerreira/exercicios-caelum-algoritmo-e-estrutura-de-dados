@@ -52,12 +52,25 @@ public class Vetor implements IVetor<Aluno>{
         throw new IllegalArgumentException("Posicao informada não é válida");
 
     }
+
+    private boolean posicaoOcupada(int posicao){
+        if(posicao >= 0 && posicao < this.totalDeAlunos){
+            return true;
+        }
+        throw new IllegalArgumentException("Posicao informada não é válida");
+
+    }
+
     @Override
     public Aluno pega(int posicao) {
-        if(this.posicaoValida(posicao)){
+        if(this.posicaoOcupada(posicao)){
             return this.alunos[posicao];
         }
         return null;
+    }
+
+    public Aluno pegaInicioCapitulo(int posicao) {
+        return this.alunos[posicao];
     }
 
     @Override
@@ -69,6 +82,16 @@ public class Vetor implements IVetor<Aluno>{
         }
         this.totalDeAlunos--;
     }
+
+    public boolean contemInicioCapitulo(Aluno aluno){
+        for(int i =0; i< this.alunos.length;i++){
+            if (this.alunos[i] == aluno){
+                return true;
+            }
+        }
+        return false;
+    }
+
 
     @Override
     public boolean contem(Aluno object) {
