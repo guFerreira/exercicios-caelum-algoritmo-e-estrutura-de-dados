@@ -20,17 +20,42 @@ public class Vetor implements IVetor{
 
     @Override
     public void adiciona(int posicao, Aluno aluno) {
+        if (this.posicaoValida(posicao)){
+            //realoco todos à direita da posição especificada
+            for(int i = this.totalDeAlunos - 1 ; i >= posicao ; i--){
+                this.alunos[i+1] = this.alunos[i];
+            }
+            this.alunos[posicao] = aluno;
+            this.totalDeAlunos++;
+        }else{
+            new IllegalArgumentException("Posicao inserida é inválida");
 
+        }
     }
 
+    private boolean posicaoValida(int posicao){
+        if(posicao >= 0 && posicao <= this.totalDeAlunos){
+            return true;
+        }
+        throw new IllegalArgumentException("Posicao informada não é válida");
+
+    }
     @Override
     public Aluno pega(int posicao) {
-        return this.alunos[posicao];
+        if(this.posicaoValida(posicao)){
+            return this.alunos[posicao];
+        }
+        return null;
     }
 
     @Override
     public void remove(int posicao) {
-
+        if(this.posicaoValida(posicao) ){
+            for(int i = posicao; i < this.totalDeAlunos -1; i++){
+                this.alunos[i] = this.alunos[i+1];
+            }
+        }
+        this.totalDeAlunos--;
     }
 
     @Override
