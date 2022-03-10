@@ -25,7 +25,7 @@ public class Vetor implements IVetor{
 
     @Override
     public Aluno pega(int posicao) {
-        return null;
+        return this.alunos[posicao];
     }
 
     @Override
@@ -35,6 +35,11 @@ public class Vetor implements IVetor{
 
     @Override
     public boolean contem(Aluno aluno) {
+        for(int i =0; i < totalDeAlunos; i++) {
+            if (aluno.equals(this.alunos[i])) {
+                return true;
+            }
+        }
         return false;
     }
 
