@@ -6,6 +6,7 @@ public class Vetor implements IVetor{
 
     @Override
     public void adiciona(Aluno aluno) {
+        this.alocarEspaco();
         //mais eficiente que a opção comentada, pois não precisa percorrer toda a lista
         //para saber onde inserir
         this.alunos[this.totalDeAlunos] = aluno;
@@ -20,6 +21,7 @@ public class Vetor implements IVetor{
 
     @Override
     public void adiciona(int posicao, Aluno aluno) {
+        this.alocarEspaco();
         if (this.posicaoValida(posicao)){
             //realoco todos à direita da posição especificada
             for(int i = this.totalDeAlunos - 1 ; i >= posicao ; i--){
@@ -73,6 +75,16 @@ public class Vetor implements IVetor{
         return this.totalDeAlunos;
     }
 
+    private void alocarEspaco(){
+        if(this.totalDeAlunos == this.alunos.length){
+            Aluno [] aux = new Aluno[this.totalDeAlunos * 2];
+            for(int i =0; i< this.totalDeAlunos; i++) {
+                aux[i] = this.alunos[i];
+            }
+            this.alunos = aux;
+
+        }
+    }
 
     public String toString() {
         if (this.totalDeAlunos == 0) {
