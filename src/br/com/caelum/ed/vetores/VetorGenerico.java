@@ -1,15 +1,15 @@
-package armazenamentoSequencial;
+package br.com.caelum.ed.vetores;
 
-public class Vetor implements IVetor{
-    private Aluno[] alunos = new Aluno[100];
+public class VetorGenerico implements IVetor{
+    private Object[] objects = new Object[50];
     private int totalDeAlunos = 0;
 
     @Override
-    public void adiciona(Aluno aluno) {
+    public void adiciona(Object aluno) {
         this.alocarEspaco();
         //mais eficiente que a opção comentada, pois não precisa percorrer toda a lista
         //para saber onde inserir
-        this.alunos[this.totalDeAlunos] = aluno;
+        this.objects[this.totalDeAlunos] = aluno;
         this.totalDeAlunos++;
         /*for(int i = 0; i < alunos.length; i++){
             if(alunos[i] == null){
@@ -20,14 +20,14 @@ public class Vetor implements IVetor{
     }
 
     @Override
-    public void adiciona(int posicao, Aluno aluno) {
+    public void adiciona(int posicao, Object aluno) {
         this.alocarEspaco();
         if (this.posicaoValida(posicao)){
             //realoco todos à direita da posição especificada
             for(int i = this.totalDeAlunos - 1 ; i >= posicao ; i--){
-                this.alunos[i+1] = this.alunos[i];
+                this.objects[i+1] = this.objects[i];
             }
-            this.alunos[posicao] = aluno;
+            this.objects[posicao] = aluno;
             this.totalDeAlunos++;
         }else{
             new IllegalArgumentException("Posicao inserida é inválida");
@@ -43,9 +43,9 @@ public class Vetor implements IVetor{
 
     }
     @Override
-    public Aluno pega(int posicao) {
+    public Object pega(int posicao) {
         if(this.posicaoValida(posicao)){
-            return this.alunos[posicao];
+            return this.objects[posicao];
         }
         return null;
     }
@@ -54,16 +54,16 @@ public class Vetor implements IVetor{
     public void remove(int posicao) {
         if(this.posicaoValida(posicao) ){
             for(int i = posicao; i < this.totalDeAlunos -1; i++){
-                this.alunos[i] = this.alunos[i+1];
+                this.objects[i] = this.objects[i+1];
             }
         }
         this.totalDeAlunos--;
     }
 
     @Override
-    public boolean contem(Aluno aluno) {
+    public boolean contem(Object aluno) {
         for(int i =0; i < totalDeAlunos; i++) {
-            if (aluno.equals(this.alunos[i])) {
+            if (aluno.equals(this.objects[i])) {
                 return true;
             }
         }
@@ -76,12 +76,12 @@ public class Vetor implements IVetor{
     }
 
     private void alocarEspaco(){
-        if(this.totalDeAlunos == this.alunos.length){
-            Aluno [] aux = new Aluno[this.totalDeAlunos * 2];
+        if(this.totalDeAlunos == this.objects.length){
+            Object[] aux = new Object[this.totalDeAlunos * 2];
             for(int i =0; i< this.totalDeAlunos; i++) {
-                aux[i] = this.alunos[i];
+                aux[i] = this.objects[i];
             }
-            this.alunos = aux;
+            this.objects = aux;
 
         }
     }
@@ -93,10 +93,10 @@ public class Vetor implements IVetor{
         StringBuilder builder = new StringBuilder();
         builder.append("[");
         for (int i = 0; i < this.totalDeAlunos - 1; i++) {
-            builder.append(this.alunos[i]);
+            builder.append(this.objects[i]);
             builder.append(", ");
         }
-        builder.append(this.alunos[this.totalDeAlunos - 1]);
+        builder.append(this.objects[this.totalDeAlunos - 1]);
         builder.append("]");
         return builder.toString();
     }

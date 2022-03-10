@@ -1,4 +1,4 @@
-package armazenamentoSequencial;
+package br.com.caelum.ed.vetores;
 
 public class Aluno {
     private String nome;
@@ -16,5 +16,12 @@ public class Aluno {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    @Override
+    public String toString() {
+        return "Aluno{" +
+                "nome='" + nome + '\'' +
+                '}';
     }
 }
