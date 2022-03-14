@@ -29,6 +29,7 @@ public class Main {
         }
         long fim = System.currentTimeMillis();
         System.out.println(inicio - fim);
+        conjunto.imprimeTabela();
 
         // -2405 tempo marcado sem as modificações de redimencionar
         // -235 tempo marcado com as modificações de redimencionar

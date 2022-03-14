@@ -2,11 +2,11 @@ package br.com.caelum.ed.conjuntos;
 
 import java.util.List;
 
-public interface IConjunto {
+public interface IConjunto<T>{
 
-    public void add(String word);
-    public void remove(String word);
-    public boolean contains(String word);
-    public List<String> getAll();
+    public void add(T t);
+    public void remove(T t);
+    public boolean contains(T t);
+    public List<T> getAll();
     public int size();
 }

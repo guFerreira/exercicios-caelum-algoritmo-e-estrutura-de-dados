@@ -4,33 +4,33 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-public class MySet implements IConjunto{
-    private List<List<String>> table;
+public class MySet implements IConjunto<Object>{
+    private List<List<Object>> table;
     private int lenght;
     public MySet() {
-        this.table = new ArrayList<List<String>>();
+        this.table = new ArrayList<List<Object>>();
         this.lenght = 0;
         for (int i = 0; i < 26; i++) {
-            LinkedList<String> lista = new LinkedList<String>();
+            LinkedList<Object> lista = new LinkedList<Object>();
             table.add(lista);
         }
     }
-    private int calcIndexTable(String word){
+    private int calcIndexTable(Object object){
         //return word.toLowerCase().charAt(0) % 26; // implementação sem espalhamento
 
-        int code = this.calculaCodigoDeEspalhamento(word);
+        int code = object.hashCode();
         code = Math.abs(code);
-        return code % table.size(); // cada char tem um valor positivo inteiro
+        return code % this.table.size();
     }
 
     private void redimensionaTabela(int novaCapacidade){
-        List<String> palavras = this.getAll();
+        List<Object> objects = this.getAll();
         this.table.clear();
         for (int i = 0; i < novaCapacidade; i++) {
-            this.table.add(new LinkedList<String>());
+            this.table.add(new LinkedList<Object>());
         }
-        for (String palavra : palavras) {
-            this.add(palavra);
+        for (Object object : objects) {
+            this.add(object);
         }
     }
     private void verificaCarga() {
@@ -44,7 +44,7 @@ public class MySet implements IConjunto{
     }
 
     public void imprimeTabela(){
-        for (List<String> list: this.table) {
+        for (List<Object> list: this.table) {
             System.out.print("[");
             for (int i = 0; i < list.size(); i++) {
                 System.out.print("*");
@@ -53,52 +53,42 @@ public class MySet implements IConjunto{
         }
     }
 
-
-    private int calculaCodigoDeEspalhamento(String palavra){
-        int codigo = 1;
-        for (int i = 0; i < palavra.length(); i++) {
-            codigo = 31 * codigo + palavra.charAt(i);
-        }
-        return codigo;
-    }
-
-
     @Override
-    public void add(String word) {
-        if(!this.contains(word)){
-            //this.verificaCarga();
-            int index = calcIndexTable(word);
-            table.get(index).add(word);
+    public void add(Object object) {
+        if(!this.contains(object)){
+            this.verificaCarga();
+            int index = calcIndexTable(object);
+            table.get(index).add(object);
             lenght++;
         }
     }
 
     @Override
-    public void remove(String word) {
-        if(this.contains(word)){
-            //this.verificaCarga();
-            int index = this.calcIndexTable(word);
-            this.table.get(index).remove(word);
+    public void remove(Object object) {
+        if(this.contains(object)){
+            int index = this.calcIndexTable(object);
+            this.table.get(index).remove(object);
             lenght--;
+            this.verificaCarga();
         }
     }
 
     @Override
-    public boolean contains(String word) {
-        int index = this.calcIndexTable(word);
-        if(this.table.get(index).contains(word)){
+    public boolean contains(Object object) {
+        int index = this.calcIndexTable(object);
+        if(this.table.get(index).contains(object)){
             return true;
         }
         return false;
     }
 
     @Override
-    public List<String> getAll() {
-        List<String> words = new ArrayList<String>();
+    public List<Object> getAll() {
+        List<Object> objects = new ArrayList<Object>();
         for (int i = 0; i < this.table.size(); i++) {
-            words.addAll(this.table.get(i));
+            objects.addAll(this.table.get(i));
         }
-        return words;
+        return objects;
     }
 
     @Override
