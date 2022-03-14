@@ -16,11 +16,11 @@ public class MySet implements IConjunto{
         }
     }
     private int calcIndexTable(String word){
-        return word.toLowerCase().charAt(0) % 26; // implementação sem espalhamento
+        //return word.toLowerCase().charAt(0) % 26; // implementação sem espalhamento
 
-        //int code = this.calculaCodigoDeEspalhamento(word);
-        //code = Math.abs(code);
-        //return code % table.size(); // cada char tem um valor positivo inteiro
+        int code = this.calculaCodigoDeEspalhamento(word);
+        code = Math.abs(code);
+        return code % table.size(); // cada char tem um valor positivo inteiro
     }
 
     public void imprimeTabela(){

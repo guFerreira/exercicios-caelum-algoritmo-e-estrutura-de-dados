@@ -18,5 +18,34 @@ public class Main {
             conjunto.add("" + i);
         }
         conjunto.imprimeTabela();
+
+        /* retorno com as alterações, os dados são espalhados pela estrutura
+        [***]
+        [****]
+        [****]
+        [****]
+        [***]
+        [***]
+        [****]
+        [****]
+        [****]
+        [****]
+        [****]
+        [****]
+        [****]
+        [****]
+        [****]
+        [****]
+        [****]
+        [****]
+        [****]
+        [****]
+        [****]
+        [****]
+        [****]
+        [****]
+        [****]
+        [***]
+        */
     }
 }
