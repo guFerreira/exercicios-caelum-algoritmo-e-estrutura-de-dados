@@ -2,23 +2,25 @@ package br.com.caelum.ed.conjuntos;
 
 public class Main {
     public static void main(String[] args) {
-        /*MySet m = new MySet();
+        MySet<String> m = new MySet();
         m.add("Alegrete");
         m.add("Amapá");
         m.add("Brasilia");
         System.out.println(m.getAll().toString());
         System.out.println(m.contains("Alegrete"));
+        System.out.println(m.size());
         m.remove("Alegrete");
         System.out.println(m.contains("Alegrete"));
         System.out.println(m.getAll().toString());
-        System.out.println(m.size());*/
+        System.out.println(m.size());
 
         /*MySet conjunto = new MySet();
         for (int i = 0; i < 100; i++) {
             conjunto.add("" + i);
         }
-        conjunto.imprimeTabela();*/
+        conjunto.imprimeTabela();
 
+        /*
         long inicio = System.currentTimeMillis();
         MySet conjunto = new MySet();
         for (int i = 0; i < 50000; i++) {
@@ -30,7 +32,7 @@ public class Main {
         long fim = System.currentTimeMillis();
         System.out.println(inicio - fim);
         conjunto.imprimeTabela();
-
+        */
         // -2405 tempo marcado sem as modificações de redimencionar
         // -235 tempo marcado com as modificações de redimencionar
     }

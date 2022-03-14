@@ -4,18 +4,18 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-public class MySet implements IConjunto<Object>{
-    private List<List<Object>> table;
+public class MySet<T> implements IConjunto<T>{
+    private List<List<T>> table;
     private int lenght;
     public MySet() {
-        this.table = new ArrayList<List<Object>>();
+        this.table = new ArrayList<List<T>>();
         this.lenght = 0;
         for (int i = 0; i < 26; i++) {
-            LinkedList<Object> lista = new LinkedList<Object>();
+            LinkedList<T> lista = new LinkedList<T>();
             table.add(lista);
         }
     }
-    private int calcIndexTable(Object object){
+    private int calcIndexTable(T object){
         //return word.toLowerCase().charAt(0) % 26; // implementação sem espalhamento
 
         int code = object.hashCode();
@@ -24,12 +24,13 @@ public class MySet implements IConjunto<Object>{
     }
 
     private void redimensionaTabela(int novaCapacidade){
-        List<Object> objects = this.getAll();
+        this.lenght = 0;
+        List<T> objects = this.getAll();
         this.table.clear();
         for (int i = 0; i < novaCapacidade; i++) {
-            this.table.add(new LinkedList<Object>());
+            this.table.add(new LinkedList<T>());
         }
-        for (Object object : objects) {
+        for (T object : objects) {
             this.add(object);
         }
     }
@@ -44,7 +45,7 @@ public class MySet implements IConjunto<Object>{
     }
 
     public void imprimeTabela(){
-        for (List<Object> list: this.table) {
+        for (List<T> list: this.table) {
             System.out.print("[");
             for (int i = 0; i < list.size(); i++) {
                 System.out.print("*");
@@ -54,7 +55,7 @@ public class MySet implements IConjunto<Object>{
     }
 
     @Override
-    public void add(Object object) {
+    public void add(T object) {
         if(!this.contains(object)){
             this.verificaCarga();
             int index = calcIndexTable(object);
@@ -64,27 +65,27 @@ public class MySet implements IConjunto<Object>{
     }
 
     @Override
-    public void remove(Object object) {
+    public void remove(T object) {
         if(this.contains(object)){
             int index = this.calcIndexTable(object);
             this.table.get(index).remove(object);
-            lenght--;
+            this.lenght--;
             this.verificaCarga();
         }
     }
 
     @Override
-    public boolean contains(Object object) {
-        int index = this.calcIndexTable(object);
-        if(this.table.get(index).contains(object)){
+    public boolean contains(T t) {
+        int index = this.calcIndexTable(t);
+        if(this.table.get(index).contains(t)){
             return true;
         }
         return false;
     }
 
     @Override
-    public List<Object> getAll() {
-        List<Object> objects = new ArrayList<Object>();
+    public List<T> getAll() {
+        List<T> objects = new ArrayList<T>();
         for (int i = 0; i < this.table.size(); i++) {
             objects.addAll(this.table.get(i));
         }
