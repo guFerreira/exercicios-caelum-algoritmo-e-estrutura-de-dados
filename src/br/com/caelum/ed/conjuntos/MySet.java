@@ -23,6 +23,26 @@ public class MySet implements IConjunto{
         return code % table.size(); // cada char tem um valor positivo inteiro
     }
 
+    private void redimensionaTabela(int novaCapacidade){
+        List<String> palavras = this.getAll();
+        this.table.clear();
+        for (int i = 0; i < novaCapacidade; i++) {
+            this.table.add(new LinkedList<String>());
+        }
+        for (String palavra : palavras) {
+            this.add(palavra);
+        }
+    }
+    private void verificaCarga() {
+        int capacidade = this.table.size();
+        double carga = (double) this.size() / capacidade;
+        if (carga > 0.75) {
+            this.redimensionaTabela(capacidade * 2);
+        } else if (carga < 0.25) {
+            this.redimensionaTabela(Math.max(capacidade / 2, 10));
+        }
+    }
+
     public void imprimeTabela(){
         for (List<String> list: this.table) {
             System.out.print("[");
@@ -46,6 +66,7 @@ public class MySet implements IConjunto{
     @Override
     public void add(String word) {
         if(!this.contains(word)){
+            //this.verificaCarga();
             int index = calcIndexTable(word);
             table.get(index).add(word);
             lenght++;
@@ -55,6 +76,7 @@ public class MySet implements IConjunto{
     @Override
     public void remove(String word) {
         if(this.contains(word)){
+            //this.verificaCarga();
             int index = this.calcIndexTable(word);
             this.table.get(index).remove(word);
             lenght--;

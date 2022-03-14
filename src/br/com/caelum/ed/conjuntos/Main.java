@@ -13,39 +13,24 @@ public class Main {
         System.out.println(m.getAll().toString());
         System.out.println(m.size());*/
 
-        MySet conjunto = new MySet();
+        /*MySet conjunto = new MySet();
         for (int i = 0; i < 100; i++) {
             conjunto.add("" + i);
         }
-        conjunto.imprimeTabela();
+        conjunto.imprimeTabela();*/
 
-        /* retorno com as alterações, os dados são espalhados pela estrutura
-        [***]
-        [****]
-        [****]
-        [****]
-        [***]
-        [***]
-        [****]
-        [****]
-        [****]
-        [****]
-        [****]
-        [****]
-        [****]
-        [****]
-        [****]
-        [****]
-        [****]
-        [****]
-        [****]
-        [****]
-        [****]
-        [****]
-        [****]
-        [****]
-        [****]
-        [***]
-        */
+        long inicio = System.currentTimeMillis();
+        MySet conjunto = new MySet();
+        for (int i = 0; i < 50000; i++) {
+            conjunto.add("palavra" + i);
+        }
+        for (int i = 0; i < 50000; i++) {
+            conjunto.contains("palavra" + i);
+        }
+        long fim = System.currentTimeMillis();
+        System.out.println(inicio - fim);
+
+        // -2405 tempo marcado sem as modificações de redimencionar
+        // -235 tempo marcado com as modificações de redimencionar
     }
 }
