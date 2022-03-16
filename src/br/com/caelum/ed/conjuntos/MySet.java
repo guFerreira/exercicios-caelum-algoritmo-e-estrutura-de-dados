@@ -10,11 +10,13 @@ public class MySet<T> implements IConjunto<T>{
     public MySet() {
         this.table = new ArrayList<List<T>>();
         this.lenght = 0;
+
         for (int i = 0; i < 26; i++) {
             LinkedList<T> lista = new LinkedList<T>();
             table.add(lista);
         }
     }
+
     private int calcIndexTable(T object){
         //return word.toLowerCase().charAt(0) % 26; // implementação sem espalhamento
 
