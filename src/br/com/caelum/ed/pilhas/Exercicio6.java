@@ -12,15 +12,14 @@ public class Exercicio6 {
         }
 
         //System.out.println(pilhaCharacter.pegarTamanho());
-        System.out.print("Mensagem");
-        String criptografada = "";
+        System.out.println("Mensagem criptografada");
+
         int tamanho = pilhaCharacter.pegarTamanho()-1;
         for (int i = 0; i < tamanho; i++){
             pilhaCharacter.remove();
             System.out.print(pilhaCharacter.peek());
         }
 
-        //System.out.println(criptografada);
 
     }
 }

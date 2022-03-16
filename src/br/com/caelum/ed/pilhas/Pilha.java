@@ -8,6 +8,7 @@ import java.util.List;
 public class Pilha implements IPilha{
 
     private List<Peca> pecas = new LinkedList<Peca>();
+
     public void insere(Peca peca) {//push
         this.pecas.add(peca);
     }

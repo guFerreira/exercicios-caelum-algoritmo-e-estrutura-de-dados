@@ -1,6 +1,6 @@
 package br.com.caelum.ed.listasligadas;
 
-public class ListaLigada implements  IListaEncadeada{
+public class ListaLigada implements IListaEncadeada<Object>{
     private Nodo primeiro;
     private Nodo ultimo;
     private int numElementos;
@@ -45,6 +45,7 @@ public class ListaLigada implements  IListaEncadeada{
     private boolean posicaoOcupada(int posicao){
         return posicao >= 0 && posicao < this.numElementos;
     }
+
     private Nodo pegaNodo(int posicao) {
         if(!this.posicaoOcupada(posicao)){
             throw new IllegalArgumentException("Posição não existe");
@@ -77,6 +78,7 @@ public class ListaLigada implements  IListaEncadeada{
             novo.getProximo().setAnterior(novo);
             novo.setAnterior(aux);
             this.numElementos++;
+
         }
     }
 
@@ -135,15 +137,18 @@ public class ListaLigada implements  IListaEncadeada{
 
     @Override
     public void removeDoComeco() {
-        if(this.numElementos == 1){
-            this.primeiro = null;
-            this.ultimo = null;
+
+        if(this.primeiro != null){
+
+            if(this.numElementos == 1){
+                this.primeiro = null;
+                this.ultimo = null;
+                this.numElementos--;
+            }
+            this.primeiro = this.primeiro.getProximo();
             this.numElementos--;
         }
-        Nodo novoPrimeiro = this.primeiro.getProximo();
-        novoPrimeiro.setAnterior(null);
-        this.primeiro = novoPrimeiro;
-        this.numElementos--;
+
     }
 
     @Override
